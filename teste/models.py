@@ -68,12 +68,12 @@ class Usuario(models.Model):
 
 class Perfil(models.Model):
     nome = models.CharField(max_length=60)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='usuarios')
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='perfis')
 
 class Postagem(models.Model):
     texto = models.CharField(max_length=500)
     data = models.DateField()
-    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='perfis')
+    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name='posts')
 
 class Comentario(models.Model):
     texto = models.CharField(max_length=250)
@@ -88,7 +88,7 @@ class Reacao(models.Model):
     peso = models.IntegerField()
 
 class PostReacao(models.Model):
-    postagem = models.ForeignKey(Postagem, on_delete=models.CASCADE, related_name='posts')
-    reacao = models.ForeignKey(Reacao, on_delete=models.CASCADE, related_name='reacoes')
-    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
+    postagem = models.ForeignKey(Postagem, on_delete=models.CASCADE, related_name= 'reacoes_post')
+    reacao = models.ForeignKey(Reacao, on_delete=models.CASCADE, related_name= 'reacoes_post')
+    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE, related_name = 'reacoes_post')
     data = models.DateField()
