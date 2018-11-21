@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/ ', admin.site.urls),
     path('', views.index, name = 'index'),
     path('/question/<int:question_id>/', views.exibir_question, name = 'question'),
+    path('/manage/<int:question_id>', views.exibir_manage, name= 'manage'),
 ]

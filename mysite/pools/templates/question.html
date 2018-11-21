@@ -2,49 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/main.css' %}" rel="stylesheet">
     <title>Question my site</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
 
-    <div class="col s12 m8">
-        <div class="card-panel">
+    <h5>Questão Nº {{ question.id }}</h5>
 
-            <center>
-                <h5>Questão Nº {{ question.id }}</h5>
-            </center>
+    <p> Text: {{ question.quest_text }} </p>
+    <p> Date: {{ question.pub_date }} </p>
+    <p> Status: {{ question.closed }} </p>
 
-            <p> Text: {{ question.quest_text }} </p>
-            <p> Date: {{ question.pub_date }} </p>
-            <p> Status: {{ question.closed }} </p>
+    <h5>Cloices da questão Nº {{ question.id }}</h5>
 
-    </div>
+    {% if questions %}
+        <table class="table">
+            <thead>
+                <th>Quest text</th>
+                <th>Pub date</th>
+                <th>Close</th>
+            </thead>
+            {% for choices in choices.item %}
+                <tr>
+                    <td>{{ choices.id }}</td>
+                    <td>
+                        <a href="{% url 'choice' choice.id %}">{{ choices.choice_text }}</a>
+                    </td>
+                    <td>{{ choices.question.question_text }}</td>
+                </tr>
+            {% endfor %}
 
-        <center class="card-panel">
-            <h5>Cloices da questão Nº {{ question.id }}</h5>
+        </table>
+    {% endif %}
 
-            {% if questions %}
-                <table class="table-responsive striped">
-                    <thead>
-                        <th>Quest text</th>
-                        <th>Pub date</th>
-                        <th>Close</th>
-                    </thead>
-                    {% for choice in choices %}
-                        <tr>
-                            <td>{{ choices.id }}</td>
-                            <td>
-                                <a href="{% url 'choice' choice.id %}">{{ choices.choice_text }}</a>
-                            </td>
-                            <td>{{ choices.question.question_text }}</td>
-                        </tr>
-                    {% endfor %}
-
-                </table>
-            {% endif %}
-        </center>
+    <div>
+        <a href="{% url 'manage' questions_id%}">Manage</a>
     </div>
 
 </body>

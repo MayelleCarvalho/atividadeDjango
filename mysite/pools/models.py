@@ -7,7 +7,10 @@ class Question(models.Model):
     closed = models.BooleanField()
     pub_date = models.DateField()
 
-    def __str__(self):
+    def remover(self):
+        pass
+
+    def __str__(self, question_id):
         return self.quest_text
 
 
