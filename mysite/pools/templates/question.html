@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question my site</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+
+    <div class="col s12 m8">
+        <div class="card-panel">
+
+            <center>
+                <h5>Questão Nº {{ question.id }}</h5>
+            </center>
+
+            <p> Text: {{ question.quest_text }} </p>
+            <p> Date: {{ question.pub_date }} </p>
+            <p> Status: {{ question.closed }} </p>
+
+    </div>
+
+        <center class="card-panel">
+            <h5>Cloices da questão Nº {{ question.id }}</h5>
+
+            {% if questions %}
+                <table class="table-responsive striped">
+                    <thead>
+                        <th>Quest text</th>
+                        <th>Pub date</th>
+                        <th>Close</th>
+                    </thead>
+                    {% for choice in choices %}
+                        <tr>
+                            <td>{{ choices.id }}</td>
+                            <td>
+                                <a href="{% url 'choice' choice.id %}">{{ choices.choice_text }}</a>
+                            </td>
+                            <td>{{ choices.question.question_text }}</td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+            {% endif %}
+        </center>
+    </div>
+
+</body>
+</html>
